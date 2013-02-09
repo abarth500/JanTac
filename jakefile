@@ -1,0 +1,23 @@
+desc('Installation Guides of JanTac');
+task('default', function (params) {
+	console.log('JanTac (Shohei Yokoyama)');
+	console.log('See following page!');
+	console.log('\thttp://lab.yokoyama.ac/Research/JanTac');
+});
+
+desc('Installing JanTac Server Module');
+task('server', function (params) {
+  console.log('This is the Server task.');
+});
+
+
+desc('Installing JanTac Client Module');
+task('client', function (params) {
+  console.log('This is the Client task.');
+});
+
+desc('Test');
+task('test', function (params) {
+  jake.mkdirP('build');
+  jake.cpR("server/","build/");
+});
