@@ -3,10 +3,9 @@
 	"copyright":"Shohei Yokoyama",
 	"administrator":"You",
 	"system":"Your JanTac",
-	"module":"server",
-	"browser":"chromium --kiosk ",
+	"module":"client",
+	"browser":"\"C:\\Program Files\\SRWare Iron\\iron.exe\" --kiosk ",
 	"serverAddress":"192.168.111.111",
 	"echoPort":40000,
-	"wsPort":40001,
-	"WOL":false
+	"wsPort":40001
 }
