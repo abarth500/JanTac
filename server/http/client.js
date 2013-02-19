@@ -12,13 +12,13 @@ JanTac.Manager = function(){
 	this.SOUTH = 2;
 	this.EAST  = 3;
 
-	this.RUN_LEVEL = RL_HALT;
-	this.HEDDING = NORTH;
+	this.RUN_LEVEL = this.RL_HALT;
+	this.HEDDING = this.NORTH;
 	this.NEIGHBOUR = [];
-	this.NEIGHBOUR[NORTH] = 0;
-	this.NEIGHBOUR[WEST ] = 0;
-	this.NEIGHBOUR[SOUTH] = 0;
-	this.NEIGHBOUR[EAST ] = 0;
+	this.NEIGHBOUR[this.NORTH] = 0;
+	this.NEIGHBOUR[this.WEST ] = 0;
+	this.NEIGHBOUR[this.SOUTH] = 0;
+	this.NEIGHBOUR[this.EAST ] = 0;
 
 	this.constractor = function(arguments){
 		console.log(JanTac.Conf.url);

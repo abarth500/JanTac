@@ -104,7 +104,7 @@ JanTac.Gesture = function(target){
 					pageY:e.changedTouches[c].pageY
 				});
 				this.fire("dragend",this.dragPath[e.changedTouches[c].identifier]);
-			}else　if(this.searchNear(e.changedTouches[c].clientX,e.changedTouches[c].clientY)){
+			}else if(this.searchNear(e.changedTouches[c].clientX,e.changedTouches[c].clientY)){
 				//位置記録から近い場所へのタップを発見したらdtap
 				this.fire("dtap",{
 					clientX:e.changedTouches[c].clientX,
