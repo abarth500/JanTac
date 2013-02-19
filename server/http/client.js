@@ -20,7 +20,7 @@ JanTac.Manager = function(){
 	this.NEIGHBOUR[this.SOUTH] = 0;
 	this.NEIGHBOUR[this.EAST ] = 0;
 
-	this.constractor = function(arguments){
+	this.init = function(arguments){
 		console.log(JanTac.Conf.url);
 		$("head").append($("<meta/>").attr("name","viewport").attr("content","width=device-width, initial-scale=1.0, user-scalable=no"));
 		$("body").attr("onContextmenu","return false;");
@@ -119,5 +119,5 @@ JanTac.Manager = function(){
 		});
 	}
 
-	this.constructor(arguments);
+	this.init(arguments);
 }
