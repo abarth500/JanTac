@@ -24,16 +24,16 @@ JanTac.Manager = function(){
 		console.log(JanTac.Conf.url);
 		$("head").append($("<meta/>").attr("name","viewport").attr("content","width=device-width, initial-scale=1.0, user-scalable=no"));
 		$("body").attr("onContextmenu","return false;");
-		$("#borderNorth").touchstart(function(){
+		$("#borderNorth").bind('touchstart',function(){
 			showPanel("north");
 		});
-		$("#borderEast").touchstart(function(){
+		$("#borderEast").bind('touchstart',function(){
 			showPanel("east");
 		});
-		$("#borderSouth").touchstart(function(){
+		$("#borderSouth").bind('touchstart',function(){
 			showPanel("south");
 		});
-		$("#borderWest").touchstart(function(){
+		$("#borderWest").bind('touchstart',function(){
 			showPanel("west");
 		});
 	}
