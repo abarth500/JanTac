@@ -12,7 +12,7 @@ desc('Installation guides of JanTac');
 task('default', function (params) {
 	console.log('JanTac (Shohei Yokoyama)');
 	console.log('See following page!');
-	console.log('\thttp://lab.yokoyama\.ac/Research/JanTac');
+	console.log('\thttp://lab.yokoyama.ac/Research/JanTac');
 });
 
 namespace("server",function(){
