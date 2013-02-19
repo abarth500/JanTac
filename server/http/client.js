@@ -21,7 +21,19 @@ JanTac.Manager = function(){
 	this.NEIGHBOUR[EAST ] = 0;
 
 	this.constractor = function(arguments){
-
+		console.log(JanTac.Conf.url);
+		$("#borderNorth").mouseover(function(){
+			showPanel("north");
+		});
+		$("#borderEast").mouseover(function(){
+			showPanel("east");
+		});
+		$("#borderSouth").mouseover(function(){
+			showPanel("south");
+		});
+		$("#borderWest").mouseover(function(){
+			showPanel("west");
+		});
 	}
 
 	this.changeRunLevel = function(newLevel){
@@ -104,18 +116,6 @@ JanTac.Manager = function(){
 				easing:"easeInOutQuint"
 			});
 		}
-		$("#borderNorth").mouseover(function(){
-			showPanel("north");
-		});
-		$("#borderEast").mouseover(function(){
-			showPanel("east");
-		});
-		$("#borderSouth").mouseover(function(){
-			showPanel("south");
-		});
-		$("#borderWest").mouseover(function(){
-			showPanel("west");
-		});
 	});
 
 	this.constructor(arguments);

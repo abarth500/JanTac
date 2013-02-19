@@ -8,7 +8,12 @@ build
 # Temp directory for node-modules install
 node_modules
 
-JanTac.sublime-workspace
+# Directory for PSD or AI files
+source
+
+#Workspace file of sublime2
+*.sublime-workspace
+
 
 
 ############

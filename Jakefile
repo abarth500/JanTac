@@ -71,10 +71,9 @@ namespace("server",function(){
 		}
 		var conf = JSON.parse(require("fs").readFileSync(dirSource+sep+"conf"+sep+"jantac.json","utf-8"));
 		var confhtml = {};
-		confhtml["urlMasterNode"] = conf["protcol"] + "://" + conf["serverAddress"] + ":" + conf["wsPort"] + "/";
-		confhtml["urlEchoNode"]   = conf["protcol"] + "://" + conf["serverAddress"] + ":" + conf["echoPort"] + "/";
+		confhtml["url"] = conf["protcol"] + "://" + conf["serverAddress"] + ":" + conf["wsPort"] + "/";
 		var jscode = 'if(typeof Jantac == "undefined"){var JanTac = {};}\n';
-		jscode +=    'if(JanTac.Conf = '+JSON.stringify(confhtml)+';}\n';
+		jscode +=    'JanTac.Conf = '+JSON.stringify(confhtml)+';\n';
 		fs.writeFileSync(dirSource+sep+"http"+sep+"conf.js",jscode);
 		var allFiles = jake.readdirR(dirSource);
 		for(var c in allFiles){
