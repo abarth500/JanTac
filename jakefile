@@ -69,6 +69,13 @@ namespace("server",function(){
 			}
 			console.log('*Update all files EXCEPT your configuration');
 		}
+		var conf = JSON.parse(require("fs").readFileSync(dirSource+sep+"conf"+sep+"jantac.json","utf-8"));
+		var confhtml = {};
+		confhtml["urlMasterNode"] = conf["protcol"] + "://" + conf["serverAddress"] + ":" + conf["wsPort"] + "/";
+		confhtml["urlEchoNode"]   = conf["protcol"] + "://" + conf["serverAddress"] + ":" + conf["echoPort"] + "/";
+		var jscode = 'if(typeof Jantac == "undefined"){var JanTac = {};}\n';
+		jscode +=    'if(JanTac.Conf = '+JSON.stringify(confhtml)+';}\n';
+		fs.writeFileSync(dirSource+sep+"html"+sep+"conf.js",jscode);
 		var allFiles = jake.readdirR(dirSource);
 		for(var c in allFiles){
 			if(allFiles[c] == dirSource || 
