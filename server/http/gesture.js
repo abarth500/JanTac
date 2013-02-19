@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 if(typeof Jantac == 'undefined'){
 	var JanTac = {};
 }
@@ -537,5 +536,3 @@ JanTac.Gesture = function(target){
 		event.preventDefault();
 	});
 };
-
->>>>>>> base version
