@@ -22,16 +22,18 @@ JanTac.Manager = function(){
 
 	this.constractor = function(arguments){
 		console.log(JanTac.Conf.url);
-		$("#borderNorth").mouseover(function(){
+		$("head").append($("<meta/>").attr("name","viewport").attr("content","width=device-width, initial-scale=1.0, user-scalable=no"));
+		$("body").attr("onContextmenu","return false;");
+		$("#borderNorth").touchstart(function(){
 			showPanel("north");
 		});
-		$("#borderEast").mouseover(function(){
+		$("#borderEast").touchstart(function(){
 			showPanel("east");
 		});
-		$("#borderSouth").mouseover(function(){
+		$("#borderSouth").touchstart(function(){
 			showPanel("south");
 		});
-		$("#borderWest").mouseover(function(){
+		$("#borderWest").touchstart(function(){
 			showPanel("west");
 		});
 	}
