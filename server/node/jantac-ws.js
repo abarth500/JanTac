@@ -8,7 +8,7 @@ function startWabSocket(conf){
 		response.end();
 	});
 	server.listen(conf["wfPort"], function() {
-		console.log((new Date()) + ' Server is listening on port ' + conf["wfPort"]);
+		console.log((new Date()) + ' Server is listening on port ' + conf["wsPort"]);
 	});
 	wsServer = new WebSocketServer({
 		httpServer: server,

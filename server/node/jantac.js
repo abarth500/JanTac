@@ -2,7 +2,7 @@
   console.log('addr: '+add);
 }); */
 
-console.log("JanTac Server Module");]]
+console.log("JanTac Server Module");
 var fs = require("fs");
 var conf = JSON.parse(fs.readFileSync("../conf/jantac.json","utf-8"));
 if(conf['WOL']){
