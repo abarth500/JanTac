@@ -63,60 +63,59 @@ JanTac.Manager = function(){
 		return false;
 	}
 
-		function hidePanel(panel){
-			showPanel(panel,false);
-		}
-		function showPanel(panel){
-			var show = (arguments.length > 1)?arguments[1]:true;
-			var axis,value;
-			console.log(panel+""+show);
-			if(show){
-				if(panel != "north"){
-					hidePanel("north");
-				}
-				if(panel != "east"){
-					hidePanel("east");
-				}
-				if(panel != "south"){
-					hidePanel("south");
-				}
-				if(panel != "west"){
-					hidePanel("west");
-				}
+	function hidePanel(panel){
+		showPanel(panel,false);
+	}
+	function showPanel(panel){
+		var show = (arguments.length > 1)?arguments[1]:true;
+		var axis,value;
+		console.log(panel+""+show);
+		if(show){
+			if(panel != "north"){
+				hidePanel("north");
 			}
-			switch(panel){
-				case "north":
-					panel = "#panelNorth";
-					axis = "marginTop";
-					value = show?$("#panelNorth").height():0;
-					break;
-				case "east":
-					panel = "#panelEast";
-					axis = "marginLeft";
-					value = show?(-1*$("#panelEast").width()):0;
-					break;
-				case "south":
-					panel = "#panelSouth";
-					axis = "marginTop";
-					value = show?(-1*$("#panelSouth").height()):0;
-					break;
-				case "west":
-					panel = "#panelWest";
-					axis = "marginLeft";
-					value = show?$("#panelWest").width():0;
-					break;
-				default:
-					return
+			if(panel != "east"){
+				hidePanel("east");
 			}
-			console.log(panel+"\t"+axis+"\t"+value);
-			var opt = {};
-			opt[axis] = value+"px";
-			$(panel).animate(opt,{
-				duration:700,
-				easing:"easeInOutQuint"
-			});
+			if(panel != "south"){
+				hidePanel("south");
+			}
+			if(panel != "west"){
+				hidePanel("west");
+			}
 		}
-	});
+		switch(panel){
+			case "north":
+				panel = "#panelNorth";
+				axis = "marginTop";
+				value = show?$("#panelNorth").height():0;
+				break;
+			case "east":
+				panel = "#panelEast";
+				axis = "marginLeft";
+				value = show?(-1*$("#panelEast").width()):0;
+				break;
+			case "south":
+				panel = "#panelSouth";
+				axis = "marginTop";
+				value = show?(-1*$("#panelSouth").height()):0;
+				break;
+			case "west":
+				panel = "#panelWest";
+				axis = "marginLeft";
+				value = show?$("#panelWest").width():0;
+				break;
+			default:
+				return
+		}
+		console.log(panel+"\t"+axis+"\t"+value);
+		var opt = {};
+		opt[axis] = value+"px";
+		$(panel).animate(opt,{
+			duration:700,
+			easing:"easeInOutQuint"
+		});
+	}
 
 	this.constructor(arguments);
 }
