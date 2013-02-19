@@ -33,7 +33,7 @@ console.log("[Init done]");
 console.log("[Start browser]");
 var exec = require('child_process').exec;
 console.log(" ->command: "+conf["browser"] + "http://" + conf["serverAddress"]+"/server.html");
-return exec(conf["browser"] + "http://" + conf["serverAddress"]+"/server.html", {timeout: 1000},
+return exec(conf["browser"] + "http://" + conf["serverAddress"]+"/server.html &", {timeout: 1000},
 	function(error, stdout, stderr) {
 		console.log('stdout: '+(stdout||'none'));
 		console.log('stderr: '+(stderr||'none'));
