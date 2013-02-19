@@ -12,7 +12,7 @@ desc('Installation guides of JanTac');
 task('default', function (params) {
 	console.log('JanTac (Shohei Yokoyama)');
 	console.log('See following page!');
-	console.log('\thttp://lab.yokoyama.ac/Research/JanTac');
+	console.log('\thttp://lab.yokoyama\.ac/Research/JanTac');
 });
 
 namespace("server",function(){
@@ -72,7 +72,7 @@ namespace("server",function(){
 		var conf = JSON.parse(require("fs").readFileSync(dirSource+sep+"conf"+sep+"jantac.json","utf-8"));
 		var confhtml = {};
 		confhtml["url"] = conf["protcol"] + "://" + conf["serverAddress"] + ":" + conf["wsPort"] + "/";
-		var jscode = 'if(typeof Jantac == "undefined"){var JanTac = {};}\n';
+		var jscode = 'if(typeof JanTac == "undefined"){var JanTac = {};}\n';
 		jscode +=    'JanTac.Conf = '+JSON.stringify(confhtml)+';\n';
 		fs.writeFileSync(dirSource+sep+"http"+sep+"conf.js",jscode);
 		var allFiles = jake.readdirR(dirSource);

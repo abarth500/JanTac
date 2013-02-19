@@ -1,4 +1,4 @@
-if(typeof Jantac == 'undefined'){
+if(typeof JanTac == 'undefined'){
 	var JanTac = {};
 }
 JanTac.Manager = function(){
