@@ -75,7 +75,7 @@ namespace("server",function(){
 		confhtml["urlEchoNode"]   = conf["protcol"] + "://" + conf["serverAddress"] + ":" + conf["echoPort"] + "/";
 		var jscode = 'if(typeof Jantac == "undefined"){var JanTac = {};}\n';
 		jscode +=    'if(JanTac.Conf = '+JSON.stringify(confhtml)+';}\n';
-		fs.writeFileSync(dirSource+sep+"html"+sep+"conf.js",jscode);
+		fs.writeFileSync(dirSource+sep+"http"+sep+"conf.js",jscode);
 		var allFiles = jake.readdirR(dirSource);
 		for(var c in allFiles){
 			if(allFiles[c] == dirSource || 
