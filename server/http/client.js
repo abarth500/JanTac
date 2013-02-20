@@ -93,7 +93,7 @@ JanTac.Manager = function(){
 					return true;
 				}
 		}
-		console.log("[changeRunLevel] Illigal run level change:"+this.RUN_LEVEL " to "+runLevel);
+		console.log("[changeRunLevel] Illigal run level change:"+this.RUN_LEVEL+" to "+runLevel);
 		return false;
 	}
 
