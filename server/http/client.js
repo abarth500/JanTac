@@ -20,8 +20,16 @@ JanTac.Manager = function(){
 	this.NEIGHBOUR[this.SOUTH] = 0;
 	this.NEIGHBOUR[this.EAST ] = 0;
 
+	this.ws = null;
+
 	this.init = function(arguments){
-		console.log(JanTac.Conf.url);
+		this.ws = new WebSocket(JanTac.Conf.url, []);
+		ws.onopen = function() {
+			ws.send("test");
+			ws.onmessage = function(message) {
+				console.log(message.data); // test
+  			};
+		}
 		$("head").append($("<meta/>").attr("name","viewport").attr("content","width=device-width, initial-scale=1.0, user-scalable=no"));
 		$("body").attr("onContextmenu","return false;");
 		$("#borderNorth").bind('touchstart',function(){
