@@ -23,58 +23,82 @@ JanTac.Manager = function(){
 	this.ws = null;
 
 	this.init = function(arguments){
-		this.ws = new WebSocket(JanTac.Conf.url, []);
-		ws.onopen = function() {
-			ws.send("test");
-			ws.onmessage = function(message) {
-				console.log(message.data); // test
-  			};
-		}
 		$("head").append($("<meta/>").attr("name","viewport").attr("content","width=device-width, initial-scale=1.0, user-scalable=no"));
 		$("body").attr("onContextmenu","return false;");
-		$("#borderNorth").bind('touchstart',function(){
-			showPanel("north");
-		});
-		$("#borderEast").bind('touchstart',function(){
-			showPanel("east");
-		});
-		$("#borderSouth").bind('touchstart',function(){
-			showPanel("south");
-		});
-		$("#borderWest").bind('touchstart',function(){
-			showPanel("west");
-		});
+		this.ws = new WebSocket(JanTac.Conf.url);
+		this.ws.onopen = function() {
+			this.ws.send("test");
+			this.ws.onmessage = function(message) {
+				console.log(message.data); // test
+				this.setBehavior(this.RL_COMPOSITE);
+  			};
+		}
+		
 	}
-
+	this.setBehavior = function(runLevel){
+		swith(runLevel){
+			case this.RL_HALT:
+				break;
+			case this.RL_PIECE:
+				break;
+			case this.RL_COMPOSITE:
+				$("#borderNorth").on('touchstart',function(){
+					this.showPanel("north");
+				});
+				$("#borderEast").on('touchstart',function(){
+					this,showPanel("east");
+				});
+				$("#borderSouth").on('touchstart',function(){
+					this.showPanel("south");
+				});
+				$("#borderWest").on('touchstart',function(){
+					this.showPanel("west");
+				});
+				break;
+			default:
+				console.log("[setBehavior] Illigal run level:"+runLevel);
+		}
+	}
+	this.clearBehavior = function(){
+		$("#borderNorth").off();
+		$("#borderEast").off();
+		$("#borderSouth").off();
+		$("#borderWest").off();
+	}
 	this.changeRunLevel = function(newLevel){
 		var oldLevel = this.RUN_LEVEL;
 		switch(oldLevel){
 			case this.RL_HALT:
 				if(newLevel == this.RL_PIECE){
+					this.setBehavior(newLevel);
 					this.RUN_LEVEL = newLevel;
 					return true;
 				}
 				break;
 			case this.RL_PIECE:
 				if(newLevel == this.RL_HALT){
+					this.setBehavior(newLevel);
 					this.RUN_LEVEL = newLevel;
 					return true;
 				}else if(newLevel == this.RL_COMPOSITE){
+					this.setBehavior(newLevel);
 					this.RUN_LEVEL = newLevel;
 					return true;
 				}
 				break;
 			case this.RL_COMPOSITE:
 				if(newLevel == this.RL_PIECE){
+					this.setBehavior(newLevel);
 					this.RUN_LEVEL = newLevel;
 					return true;
 				}
 		}
+		console.log("[changeRunLevel] Illigal run level change:"+this.RUN_LEVEL " to "+runLevel);
 		return false;
 	}
 
 	function hidePanel(panel){
-		showPanel(panel,false);
+		this.showPanel(panel,false);
 	}
 	function showPanel(panel){
 		var show = (arguments.length > 1)?arguments[1]:true;
@@ -82,16 +106,16 @@ JanTac.Manager = function(){
 		console.log(panel+""+show);
 		if(show){
 			if(panel != "north"){
-				hidePanel("north");
+				this.hidePanel("north");
 			}
 			if(panel != "east"){
-				hidePanel("east");
+				this.hidePanel("east");
 			}
 			if(panel != "south"){
-				hidePanel("south");
+				this.hidePanel("south");
 			}
 			if(panel != "west"){
-				hidePanel("west");
+				this.hidePanel("west");
 			}
 		}
 		switch(panel){
