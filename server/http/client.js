@@ -36,7 +36,7 @@ JanTac.Manager = function(){
 		
 	}
 	this.setBehavior = function(runLevel){
-		swith(runLevel){
+		switch(runLevel){
 			case this.RL_HALT:
 				break;
 			case this.RL_PIECE:
