@@ -25,17 +25,21 @@ JanTac.Manager = function(){
 	this.init = function(arguments){
 		$("head").append($("<meta/>").attr("name","viewport").attr("content","width=device-width, initial-scale=1.0, user-scalable=no"));
 		$("body").attr("onContextmenu","return false;");
+		console.log("WebSocket Connect");
 		this.ws = new WebSocket(JanTac.Conf.url);
 		this.ws.onopen = function() {
+			this.setBehavior(this.RL_COMPOSITE);
+			console.log("WebSocket Open");
 			this.ws.send("test");
 			this.ws.onmessage = function(message) {
+				console.log("WebSocket Message");
 				console.log(message.data); // test
-				this.setBehavior(this.RL_COMPOSITE);
   			};
 		}
 		
 	}
 	this.setBehavior = function(runLevel){
+		this.clearBehavior();
 		switch(runLevel){
 			case this.RL_HALT:
 				break;
