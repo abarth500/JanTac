@@ -26,7 +26,11 @@ JanTac.Manager = function(){
 		$("head").append($("<meta/>").attr("name","viewport").attr("content","width=device-width, initial-scale=1.0, user-scalable=no"));
 		$("body").attr("onContextmenu","return false;");
 		console.log("WebSocket Connect");
-		this.ws = new WebSocket(JanTac.Conf.url);
+		var url = "ws://192.168.111.111:40001/";/*for debug*/
+		if(typeof JanTac.Conf != "undefined"){
+			url = JanTac.Conf.url;
+		}
+		this.ws = new WebSocket(url);
 		this.ws.onopen = function() {
 			this.setBehavior(this.RL_COMPOSITE);
 			console.log("WebSocket Open");

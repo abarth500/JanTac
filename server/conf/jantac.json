@@ -4,7 +4,7 @@
 	"administrator":"You",
 	"system":"Your JanTac",
 	"module":"server",
-	"browser":"chromium --kiosk ",
+	"browser":"chromium-browser --kiosk ",
 	"protcol":"ws",
 	"serverAddress":"192.168.111.111",
 	"echoPort":40000,
