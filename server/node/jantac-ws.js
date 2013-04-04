@@ -1,4 +1,4 @@
-function startWabSocket(conf){
+function startWebSocket(conf){
 	var WebSocketServer = require('websocket').server;
 	var http = require('http');
 
@@ -7,17 +7,11 @@ function startWabSocket(conf){
 		response.writeHead(404);
 		response.end();
 	});
-	server.listen(conf["wfPort"], function() {
+	server.listen(conf["wsPort"], function() {
 		console.log((new Date()) + ' Server is listening on port ' + conf["wsPort"]);
 	});
 	wsServer = new WebSocketServer({
 		httpServer: server,
-		// You should not use autoAcceptConnections for production
-		// applications, as it defeats all standard cross-origin protection
-		// facilities built into the protocol and the browser.  You should
-		// *always* verify the connection's origin and decide whether or not
-		// to accept it.
-		autoAcceptConnections: false
 	});
 
 	function originIsAllowed(origin) {
@@ -51,4 +45,4 @@ function startWabSocket(conf){
 	});
 }
 
-module.exports.startWabSocket = startWabSocket;
+module.exports.startWebSocket = startWebSocket;

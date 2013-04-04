@@ -28,7 +28,7 @@ var server = net.createServer(
 server.listen(conf['echoPort']);
 console.log("[WebSocket Server]");
 var ws = require(__dirname+require('path').sep+'jantac-ws.js');
-ws.startWabSocket(conf);
+ws.startWebSocket(conf);
 console.log("[Init done]");
 console.log("[Start browser]");
 var exec = require('child_process').exec;
