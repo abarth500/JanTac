@@ -52,18 +52,18 @@ JanTac.Manager = function(){
 			case this.RL_PIECE:
 				break;
 			case this.RL_COMPOSITE:
-				$("#borderNorth").on('touchstart',function(){
+				$("#borderNorth").on('touchstart',$.proxy(function(){
 					this.showPanel("north");
-				});
-				$("#borderEast").on('touchstart',function(){
+				}),this);
+				$("#borderEast").on('touchstart',$.proxy(function(){
 					this,showPanel("east");
-				});
-				$("#borderSouth").on('touchstart',function(){
+				}),this);
+				$("#borderSouth").on('touchstart',$.proxy(function(){
 					this.showPanel("south");
-				});
-				$("#borderWest").on('touchstart',function(){
+				}),this);
+				$("#borderWest").on('touchstart',$.proxy(function(){
 					this.showPanel("west");
-				});
+				}),this);
 				break;
 			default:
 				console.log("[setBehavior] Illigal run level:"+runLevel);
