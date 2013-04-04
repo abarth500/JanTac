@@ -20,4 +20,4 @@ find /jantac -type f -print | xargs chmod 644
 find /jantac -type d -print | xargs chmod 755
  
 cd /jantac/node
-node jantac.js　&
+node jantac.js&
