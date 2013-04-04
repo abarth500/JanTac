@@ -41,8 +41,8 @@ JanTac.Manager = function(){
 				console.log(message.data); // test
   			};
 		}
-		this.ws..onclose = function(evt) { console.log("\tClose:"+JSON.stringify(evt));};  
-		this.ws..onerror = function(evt) { console.log("\tERROR:"+JSON.stringify(evt)); };
+		this.ws.onclose = function(evt) { console.log("\tClose:"+JSON.stringify(evt));};  
+		this.ws.onerror = function(evt) { console.log("\tERROR:"+JSON.stringify(evt)); };
 	}
 	this.setBehavior = function(runLevel){
 		this.clearBehavior();
