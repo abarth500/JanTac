@@ -54,16 +54,16 @@ JanTac.Manager = function(){
 			case this.RL_COMPOSITE:
 				$("#borderNorth").on('touchstart',$.proxy(function(){
 					this.showPanel("north");
-				}),this);
+				},this));
 				$("#borderEast").on('touchstart',$.proxy(function(){
 					this,showPanel("east");
-				}),this);
+				},this));
 				$("#borderSouth").on('touchstart',$.proxy(function(){
 					this.showPanel("south");
-				}),this);
+				},this));
 				$("#borderWest").on('touchstart',$.proxy(function(){
 					this.showPanel("west");
-				}),this);
+				},this));
 				break;
 			default:
 				console.log("[setBehavior] Illigal run level:"+runLevel);
