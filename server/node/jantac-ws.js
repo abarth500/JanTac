@@ -22,6 +22,7 @@ function startWabSocket(conf){
 
 	function originIsAllowed(origin) {
 		// put logic here to detect whether the specified origin is allowed.
+		console.log("\tORIGIN:"+origin);
 		return true;
 	}
 
@@ -33,7 +34,7 @@ function startWabSocket(conf){
 			return;
 		}
 
-		var connection = request.accept('echo-protocol', request.origin);
+		var connection = request.accept('JanTacMessaging', request.origin);
 		console.log((new Date()) + ' Connection accepted.');
 		connection.on('message', function(message) {
 			if (message.type === 'utf8') {

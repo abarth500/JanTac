@@ -31,7 +31,7 @@ JanTac.Manager = function(){
 			url = JanTac.Conf.url;
 		}
 		console.log("\tto: "+url);
-		this.ws = new WebSocket(url);
+		this.ws = new WebSocket(url,"JanTacMessaging");
 		this.ws.onopen = function() {
 			this.setBehavior(this.RL_COMPOSITE);
 			console.log("WebSocket Open");
