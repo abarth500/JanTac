@@ -28,7 +28,7 @@ function startWebSocket(conf){
 			return;
 		}
 
-		var connection = request.accept('JanTacMessaging', request.origin);
+		var connection = request.accept(null, request.origin);
 		console.log((new Date()) + ' Connection accepted.');
 		connection.on('message', function(message) {
 			if (message.type === 'utf8') {
