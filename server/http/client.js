@@ -56,7 +56,7 @@ JanTac.Manager = function(){
 					this.showPanel("north");
 				},this));
 				$("#borderEast").on('touchstart',$.proxy(function(){
-					this,showPanel("east");
+					this.showPanel("east");
 				},this));
 				$("#borderSouth").on('touchstart',$.proxy(function(){
 					this.showPanel("south");
