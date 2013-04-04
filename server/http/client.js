@@ -107,10 +107,10 @@ JanTac.Manager = function(){
 		return false;
 	}
 
-	function hidePanel(panel){
+	this.hidePanel = function(panel){
 		this.showPanel(panel,false);
 	}
-	function showPanel(panel){
+	this.showPanel = function(panel){
 		var show = (arguments.length > 1)?arguments[1]:true;
 		var axis,value;
 		console.log(panel+""+show);
