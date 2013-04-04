@@ -30,6 +30,7 @@ JanTac.Manager = function(){
 		if(typeof JanTac.Conf != "undefined"){
 			url = JanTac.Conf.url;
 		}
+		console.log("\tto: "+url);
 		this.ws = new WebSocket(url);
 		this.ws.onopen = function() {
 			this.setBehavior(this.RL_COMPOSITE);
