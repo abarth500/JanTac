@@ -32,7 +32,7 @@ JanTac.Manager = function(){
 		}
 		console.log("\tto: "+url);
 		this.ws = new WebSocket(url,"JanTacMessaging");
-		this.ws.onopen = function() {
+		this.ws.onopen = $.proxy(function() {
 			this.setBehavior(this.RL_COMPOSITE);
 			console.log("WebSocket Open");
 			this.ws.send("test");
@@ -40,7 +40,7 @@ JanTac.Manager = function(){
 				console.log("WebSocket Message");
 				console.log(message.data); // test
   			};
-		}
+		},this);
 		this.ws.onclose = function(evt) { console.log("\tClose:"+JSON.stringify(evt));};  
 		this.ws.onerror = function(evt) { console.log("\tERROR:"+JSON.stringify(evt)); };
 	}
