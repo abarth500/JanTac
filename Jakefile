@@ -76,6 +76,14 @@ namespace("server",function(){
 		var jscode = 'if(typeof JanTac == "undefined"){var JanTac = {};}\n';
 		jscode +=    'JanTac.Conf = '+JSON.stringify(confhtml)+';\n';
 		fs.writeFileSync(dirSource+sep+"http"+sep+"conf.js",jscode);
+		var binFiles = jake.readdirR(dirSource+"/bin");
+		for(var c in binFiles){
+			if(fs.statSync(binFiles[c]).isFile()){
+				var contents = fs.readFileSync(binFiles[c]);
+				contents= contents.replace("/\%\%\%PREFIX\%\%\%/g",conf["path"]);
+				fs.writeFileSync(binFiles[c],contents);
+			}
+		}
 		var allFiles = jake.readdirR(dirSource);
 		for(var c in allFiles){
 			if(allFiles[c] == dirSource || 
@@ -156,6 +164,13 @@ namespace("client",function(){
 				return false;
 			}
 			console.log('*Update all files EXCEPT your configuration');
+		}
+		for(var c in binFiles){
+			if(fs.statSync(binFiles[c]).isFile()){
+				var contents = fs.readFileSync(binFiles[c]);
+				contents= contents.replace("/\%\%\%PREFIX\%\%\%/g",conf["path"]);
+				fs.writeFileSync(binFiles[c],contents);
+			}
 		}
 		var allFiles = jake.readdirR(dirSource);
 		for(var c in allFiles){

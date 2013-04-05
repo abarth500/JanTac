@@ -1,3 +1,2 @@
-cd /d %~dp0
-cd ..\node
+cd /d %%%PREFIX%%%
 node agent.js &
