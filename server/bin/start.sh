@@ -1,5 +1,6 @@
 #! /usr/bin/bash
 
+
 PREFIX=%%%PREFIX%%%
 
 if [ -e ~/jantac-git ]; then
@@ -22,5 +23,7 @@ jake -f ./Jakefile "server:install"
 find ${PREFIX} -type f -print | xargs chmod 644
 find ${PREFIX} -type d -print | xargs chmod 755
  
+cd ${0%/*}
+cd ..
 cd ${PREFIX}/node
 node jantac.js&
