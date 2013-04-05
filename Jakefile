@@ -77,7 +77,7 @@ namespace("server",function(){
 		jscode +=    'JanTac.Conf = '+JSON.stringify(confhtml)+';\n';
 		fs.writeFileSync(dirSource+sep+"http"+sep+"conf.js",jscode);
 		if(!fs.statSync(conf["path"]).isDirectory()){
-			jake.mkdirP(conf["path"]);
+			fs.mkdirSync(conf["path"]);
 		}
 		var binFiles = jake.readdirR(dirSource+"/bin");
 		for(var c in binFiles){
@@ -169,7 +169,7 @@ namespace("client",function(){
 			console.log('*Update all files EXCEPT your configuration');
 		}
 		if(!fs.statSync(conf["path"]).isDirectory()){
-			jake.mkdirP(conf["path"]);
+			fs.mkdirSync(conf["path"]);
 		}
 		var binFiles = jake.readdirR(dirSource+"/bin");
 		for(var c in binFiles){
