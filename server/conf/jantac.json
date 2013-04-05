@@ -9,5 +9,6 @@
 	"serverAddress":"192.168.111.111",
 	"echoPort":40000,
 	"wsPort":40001,
+	"path":"~/jantac-server",
 	"WOL":false
 }

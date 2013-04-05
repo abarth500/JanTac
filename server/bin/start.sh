@@ -1,5 +1,7 @@
 #! /usr/bin/bash
 
+PREFIX=%%%PREFIX%%%
+
 if [ -e ~/jantac-git ]; then
 	rm -rf ~/jantac-git
 fi
@@ -14,10 +16,11 @@ rm -rf ~/jantac-git
 cd ~/jantac
 if $AllNew ; then
 	jake -f ./Jakefile "server:configure"
+#	jake -f ./JakeFile "server:configure path=/jantac"
 fi
-jake -f ./Jakefile "server:install[/jantac]"
-find /jantac -type f -print | xargs chmod 644
-find /jantac -type d -print | xargs chmod 755
+jake -f ./Jakefile "server:install"
+find ${PREFIX} -type f -print | xargs chmod 644
+find ${PREFIX} -type d -print | xargs chmod 755
  
-cd /jantac/node
+cd ${PREFIX}/node
 node jantac.js&

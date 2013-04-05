@@ -54,22 +54,23 @@ namespace("server",function(){
 		console.log('--->Finish!!!');
 	});
 	desc('Installing JanTac server module');
-	task('install',function(installTo){
+	task('install',function(){
 		console.log('Install JanTac Server');
 		var dirSource = 'server';
+		var conf = JSON.parse(require("fs").readFileSync(dirSource+sep+"conf"+sep+"jantac.json","utf-8"));
 		var fs = require('fs');
 		if(fs.existsSync(dirBuild)){
 			console.log('*New configuration is exist.');
 			console.log('*Update all files INCLUDES your configuration');
 			dirSource = dirBuild + sep + dirSource;
 		}else{
-			if(!fs.existsSync(installTo + sep + 'conf')){
+			if(!fs.existsSync(conf["path"] + sep + 'conf')){
 				console.error("[ERROR]: Configuration first!");
 				return false;
 			}
 			console.log('*Update all files EXCEPT your configuration');
 		}
-		var conf = JSON.parse(require("fs").readFileSync(dirSource+sep+"conf"+sep+"jantac.json","utf-8"));
+		
 		var confhtml = {};
 		confhtml["url"] = conf["protcol"] + "://" + conf["serverAddress"] + ":" + conf["wsPort"] + "/";
 		var jscode = 'if(typeof JanTac == "undefined"){var JanTac = {};}\n';
@@ -83,17 +84,17 @@ namespace("server",function(){
 			}
 			var stats = fs.statSync(allFiles[c]);
 			if(stats.isDirectory()){
-				jake.cpR(allFiles[c],installTo);
+				jake.cpR(allFiles[c],conf["path"]);
 			}
 		}
 		console.log('--->Finish!!!');
 		if(fs.existsSync(dirBuild)){
 			jake.Task['clean'].invoke();
 		}
-		jake.Task['server:modules'].invoke(installTo);
+		jake.Task['server:modules'].invoke(conf["path"]);
 	});
 	desc('Install/Update required node.js modules');
-	task('modules', function (installTo) {
+	task('modules', function (conf["path"]) {
 		var cmds = [];
 		for(var c in modules['server']){
 			cmds.push('npm install '+modules['server'][c]);
@@ -101,15 +102,15 @@ namespace("server",function(){
 		if(cmds.length>0){
 			jake.exec(cmds, function () {
 				console.log('All nodejs modules are installed.');
-				jake.rmRf(installTo+sep+'node'+sep+'node_modules');
-				jake.cpR('node_modules',installTo+sep+'node'+sep);
+				jake.rmRf(conf["path"]+sep+'node'+sep+'node_modules');
+				jake.cpR('node_modules',conf["path"]+sep+'node'+sep);
 				jake.rmRf('node_modules');
 				complete();
 			}, {printStdout: true});
 		}else{
 			jake.mkdirP('node_modules');
-			jake.rmRf(installTo+sep+'node'+sep+'node_modules');
-			jake.cpR('node_modules',installTo+sep+'node'+sep);
+			jake.rmRf(conf["path"]+sep+'node'+sep+'node_modules');
+			jake.cpR('node_modules',conf["path"]+sep+'node'+sep);
 			jake.rmRf('node_modules');
 		}
 	});
@@ -140,16 +141,17 @@ namespace("client",function(){
 	});
 
 	desc('Installing JanTac client module');
-	task('install', function (installTo) {
+	task('install', function () {
 		console.log('Install JanTac Client');
 		var dirSource = 'client';
+		var conf = JSON.parse(require("fs").readFileSync(dirSource+sep+"conf"+sep+"jantac.json","utf-8"));
 		var fs = require('fs');
 		if(fs.existsSync(dirBuild)){
 			console.log('*New configuration is exist.');
 			console.log('*Update all files INCLUDES your configuration');
 			dirSource = dirBuild + sep + dirSource;
 		}else{
-			if(!fs.existsSync(installTo + sep + 'conf')){
+			if(!fs.existsSync(conf["path"] + sep + 'conf')){
 				console.error("[ERROR]: Configuration first!");
 				return false;
 			}
@@ -164,18 +166,18 @@ namespace("client",function(){
 			}
 			var stats = fs.statSync(allFiles[c]);
 			if(stats.isDirectory()){
-				jake.cpR(allFiles[c],installTo);
+				jake.cpR(allFiles[c],conf["path"]);
 			}
 		}
 		console.log('--->Finish!!!');
 		if(fs.existsSync(dirBuild)){
 			jake.Task['clean'].invoke();
 		}
-		jake.Task['client:modules'].invoke(installTo);
+		jake.Task['client:modules'].invoke(conf["path"]);
 	});
 	
 	desc('Install/Update required node.js modules');
-	task('modules', function (installTo) {
+	task('modules', function (conf["path"]) {
 		var cmds = [];
 		for(var c in modules['client']){
 			cmds.push('npm install '+modules['client'][c]);
@@ -183,15 +185,15 @@ namespace("client",function(){
 		if(cmds.length>0){
 			jake.exec(cmds, function () {
 				console.log('All nodejs modules installed.');
-				jake.rmRf(installTo+sep+'node'+sep+'node_modules');
-				jake.cpR('node_modules',installTo+sep+'node'+sep);
+				jake.rmRf(conf["path"]+sep+'node'+sep+'node_modules');
+				jake.cpR('node_modules',conf["path"]+sep+'node'+sep);
 				jake.rmRf('node_modules');
 				complete();
 			}, {printStdout: true});
 		}else{
 			jake.mkdirP('node_modules');
-			jake.rmRf(installTo+sep+'node'+sep+'node_modules');
-			jake.cpR('node_modules',installTo+sep+'node'+sep);
+			jake.rmRf(conf["path"]+sep+'node'+sep+'node_modules');
+			jake.cpR('node_modules',conf["path"]+sep+'node'+sep);
 			jake.rmRf('node_modules');
 		}
 	});

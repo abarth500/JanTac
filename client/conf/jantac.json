@@ -5,6 +5,7 @@
 	"system":"Your JanTac",
 	"module":"client",
 	"browser":"\"C:\\Program Files\\SRWare Iron\\iron.exe\" --kiosk ",
+	"path":"c:\\jantac"
 	"protcol":"ws",
 	"serverAddress":"192.168.111.111",
 	"echoPort":40000,
