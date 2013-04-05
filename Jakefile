@@ -63,8 +63,8 @@ namespace("server",function(){
 	task('install',function(){
 		console.log('Install JanTac Server');
 		var dirSource = 'server';
-		var conf = JSON.parse(fs.readFileSync(dirBuild+sep+"server"+sep+"conf"+sep+"jantac.json","utf-8"));
 		var fs = require('fs');
+		var conf = JSON.parse(fs.readFileSync(dirBuild+sep+"server"+sep+"conf"+sep+"jantac.json","utf-8"));
 		if(fs.existsSync(dirBuild)){
 			console.log('*New configuration is exist.');
 			console.log('*Update all files INCLUDES your configuration');
