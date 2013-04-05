@@ -79,7 +79,7 @@ namespace("server",function(){
 		var jscode = 'if(typeof JanTac == "undefined"){var JanTac = {};}\n';
 		jscode +=    'JanTac.Conf = '+JSON.stringify(confhtml)+';\n';
 		fs.writeFileSync(dirSource+sep+"http"+sep+"conf.js",jscode);
-		if(!fs.statSync(conf["path"]).isDirectory()){
+		if(fs.ExistsSync(conf["path"]) || !fs.statSync(conf["path"]).isDirectory()){
 			fs.mkdirSync(conf["path"]);
 		}
 		var binFiles = jake.readdirR(dirSource+"/bin");
@@ -171,7 +171,7 @@ namespace("client",function(){
 			}
 			console.log('*Update all files EXCEPT your configuration');
 		}
-		if(!fs.statSync(conf["path"]).isDirectory()){
+		if(fs.ExistsSync(conf["path"]) || !fs.statSync(conf["path"]).isDirectory()){
 			fs.mkdirSync(conf["path"]);
 		}
 		var binFiles = jake.readdirR(dirSource+"/bin");
