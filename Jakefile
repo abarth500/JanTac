@@ -83,7 +83,7 @@ namespace("server",function(){
 		for(var c in binFiles){
 			if(fs.statSync(binFiles[c]).isFile()){
 				var contents = fs.readFileSync(binFiles[c],"utf8");
-				contents= contents.replace("/\%\%\%PREFIX\%\%\%/g",conf["path"]);
+				contents= contents.replace(/\%\%\%PREFIX\%\%\%/g,conf["path"]);
 				fs.writeFileSync(binFiles[c],contents);
 			}
 		}
@@ -175,7 +175,7 @@ namespace("client",function(){
 		for(var c in binFiles){
 			if(fs.statSync(binFiles[c]).isFile()){
 				var contents = fs.readFileSync(binFiles[c],"utf8");
-				contents= contents.replace("/\%\%\%PREFIX\%\%\%/g",conf["path"]);
+				contents= contents.replace(/\%\%\%PREFIX\%\%\%/g,conf["path"]);
 				fs.writeFileSync(binFiles[c],contents);
 			}
 		}
