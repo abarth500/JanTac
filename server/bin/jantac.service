@@ -3,7 +3,7 @@ Description=JanTac Server Module
 
 [Service]
 Type=forking
-User=%%%USER%%%
+User=jantac
 Environment=DISPLAY=:0
 ExecStart=/usr/bin/bash %%%PREFIX%%%/bin/start.sh
 ExecStop=/usr/bin/bash %%%PREFIX%%%/bin/stop.sh
