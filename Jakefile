@@ -102,7 +102,7 @@ namespace("server",function(){
 		jake.Task['server:modules'].invoke(conf["path"]);
 	});
 	desc('Install/Update required node.js modules');
-	task('modules', function (conf["path"]) {
+	task('modules', function (path) {
 		var cmds = [];
 		for(var c in modules['server']){
 			cmds.push('npm install '+modules['server'][c]);
@@ -110,15 +110,15 @@ namespace("server",function(){
 		if(cmds.length>0){
 			jake.exec(cmds, function () {
 				console.log('All nodejs modules are installed.');
-				jake.rmRf(conf["path"]+sep+'node'+sep+'node_modules');
-				jake.cpR('node_modules',conf["path"]+sep+'node'+sep);
+				jake.rmRf(path+sep+'node'+sep+'node_modules');
+				jake.cpR('node_modules',path+sep+'node'+sep);
 				jake.rmRf('node_modules');
 				complete();
 			}, {printStdout: true});
 		}else{
 			jake.mkdirP('node_modules');
-			jake.rmRf(conf["path"]+sep+'node'+sep+'node_modules');
-			jake.cpR('node_modules',conf["path"]+sep+'node'+sep);
+			jake.rmRf(path+sep+'node'+sep+'node_modules');
+			jake.cpR('node_modules',path+sep+'node'+sep);
 			jake.rmRf('node_modules');
 		}
 	});
@@ -192,7 +192,7 @@ namespace("client",function(){
 	});
 	
 	desc('Install/Update required node.js modules');
-	task('modules', function (conf["path"]) {
+	task('modules', function (path) {
 		var cmds = [];
 		for(var c in modules['client']){
 			cmds.push('npm install '+modules['client'][c]);
@@ -200,15 +200,15 @@ namespace("client",function(){
 		if(cmds.length>0){
 			jake.exec(cmds, function () {
 				console.log('All nodejs modules installed.');
-				jake.rmRf(conf["path"]+sep+'node'+sep+'node_modules');
-				jake.cpR('node_modules',conf["path"]+sep+'node'+sep);
+				jake.rmRf(path+sep+'node'+sep+'node_modules');
+				jake.cpR('node_modules',path+sep+'node'+sep);
 				jake.rmRf('node_modules');
 				complete();
 			}, {printStdout: true});
 		}else{
 			jake.mkdirP('node_modules');
-			jake.rmRf(conf["path"]+sep+'node'+sep+'node_modules');
-			jake.cpR('node_modules',conf["path"]+sep+'node'+sep);
+			jake.rmRf(path+sep+'node'+sep+'node_modules');
+			jake.cpR('node_modules',path+sep+'node'+sep);
 			jake.rmRf('node_modules');
 		}
 	});
