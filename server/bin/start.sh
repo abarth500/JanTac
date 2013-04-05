@@ -17,13 +17,13 @@ rm -rf ~/jantac-git
 cd ~/jantac
 if $AllNew ; then
 	jake -f ./Jakefile "server:configure"
-#	jake -f ./JakeFile "server:configure path=/jantac"
+#	jake -f ./Jakefile "server:configure path=/jantac"
 fi
 jake -f ./Jakefile "server:install"
 find ${PREFIX} -type f -print | xargs chmod 644
 find ${PREFIX} -type d -print | xargs chmod 755
  
-cd ${0%/*}
+cd ${PWD}/${1%/*}
 cd ..
 cd ${PREFIX}/node
 node jantac.js&

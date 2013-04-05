@@ -41,6 +41,12 @@ namespace("server",function(){
 		if(typeof process.env.system != 'undefined'){
 			conf["system"] = process.env.system;
 		}
+		if(typeof process.env.path != 'undefined'){
+			conf["path"] = typeof process.env.path;
+		}
+		if(conf["path"]==""){
+				conf["path"] = process.env.HOME + "/jantac-server";
+		}
 		if(ERROR.length>0){
 			console.error("[ERROR]\n\t" + ERROR.join("\n\t")+"\n");
 			return false;
@@ -58,9 +64,6 @@ namespace("server",function(){
 		console.log('Install JanTac Server');
 		var dirSource = 'server';
 		var conf = JSON.parse(require("fs").readFileSync(dirSource+sep+"conf"+sep+"jantac.json","utf-8"));
-		if(conf["path"]==""){
-			conf["path"] = "./jantac-server";
-		}
 		var fs = require('fs');
 		if(fs.existsSync(dirBuild)){
 			console.log('*New configuration is exist.');
