@@ -63,7 +63,7 @@ namespace("server",function(){
 	task('install',function(){
 		console.log('Install JanTac Server');
 		var dirSource = 'server';
-		var conf = JSON.parse(require("fs").readFileSync(dirSource+sep+"conf"+sep+"jantac.json","utf-8"));
+		var conf = JSON.parse(fs.readFileSync(dirBuild+sep+"server"+sep+"conf"+sep+"jantac.json","utf-8"));
 		var fs = require('fs');
 		if(fs.existsSync(dirBuild)){
 			console.log('*New configuration is exist.');
@@ -161,7 +161,7 @@ namespace("client",function(){
 	task('install', function () {
 		console.log('Install JanTac Client');
 		var dirSource = 'client';
-		var conf = JSON.parse(require("fs").readFileSync(dirSource+sep+"conf"+sep+"jantac.json","utf-8"));
+		var conf = JSON.parse(require("fs").readFileSync(dirBuild+sep+"client"+sep+"conf"+sep+"jantac.json","utf-8"));
 		var fs = require('fs');
 		if(fs.existsSync(dirBuild)){
 			console.log('*New configuration is exist.');
