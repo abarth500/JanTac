@@ -33,9 +33,10 @@ JanTac.Manager = function(){
 		console.log("\tto: "+url);
 		this.ws = new WebSocket(url,"JanTacMessaging");
 		this.ws.onopen = $.proxy(function() {
-			this.setBehavior(this.RL_COMPOSITE);
+			//this.setBehavior(this.RL_COMPOSITE);
 			console.log("WebSocket Open");
 			this.ws.send("test");
+			this.changeRunLevel(this.RL_PIECE);
 			this.ws.onmessage = function(message) {
 				console.log("WebSocket Message");
 				console.log(message.data); // test
@@ -44,14 +45,24 @@ JanTac.Manager = function(){
 		this.ws.onclose = function(evt) { console.log("\tClose:"+JSON.stringify(evt));};  
 		this.ws.onerror = function(evt) { console.log("\tERROR:"+JSON.stringify(evt)); };
 	}
+	this.writePieceMenu = function(menu){
+		$("#borderNorth").html("");
+		$("#borderEast").html("");
+		$("#borderSouth").html("");
+		$("#borderWest").html("");
+		var icon = $("<img/>").attr("src","image/iconFallIn.png");
+		$("#borderNorth").append(icon);
+		$("#borderEast").append(icon);
+		$("#borderSouth").append(icon);
+		$("#borderWest").append(icon);
+	}
 	this.setBehavior = function(runLevel){
 		this.clearBehavior();
 		switch(runLevel){
 			case this.RL_HALT:
 				break;
 			case this.RL_PIECE:
-				break;
-			case this.RL_COMPOSITE:
+				this.writePieceMenu();
 				$("#borderNorth").on('touchstart',$.proxy(function(){
 					this.showPanel("north");
 				},this));
@@ -64,6 +75,9 @@ JanTac.Manager = function(){
 				$("#borderWest").on('touchstart',$.proxy(function(){
 					this.showPanel("west");
 				},this));
+				break;
+			case this.RL_COMPOSITE:
+				$('panelCover').show();
 				break;
 			default:
 				console.log("[setBehavior] Illigal run level:"+runLevel);
