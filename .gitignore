@@ -8,6 +8,7 @@ build
 
 # Temp directory for node-modules install
 node_modules
+node/node_modules
 
 # Directory for PSD or AI files
 source

@@ -65,7 +65,8 @@ JanTac.Gesture = function(target){
 				screenX:e.changedTouches[c].screenX,
 				screenY:e.changedTouches[c].screenY,
 				pageX:e.changedTouches[c].pageX,
-				pageY:e.changedTouches[c].pageY
+				pageY:e.changedTouches[c].pageY,
+				time:+new Date()
 			},e.changedTouches[c].identifier]);
 			//新規path作成
 			this.dragPath[e.changedTouches[c].identifier] = [{
@@ -75,7 +76,8 @@ JanTac.Gesture = function(target){
 				screenX:e.changedTouches[c].screenX,
 				screenY:e.changedTouches[c].screenY,
 				pageX:e.changedTouches[c].pageX,
-				pageY:e.changedTouches[c].pageY
+				pageY:e.changedTouches[c].pageY,
+				time:+new Date()
 			}];
 			//イベントを記録
 			this.lastTouch[e.changedTouches[c].identifier] = "touchstart";
@@ -101,7 +103,8 @@ JanTac.Gesture = function(target){
 					screenX:e.changedTouches[c].screenX,
 					screenY:e.changedTouches[c].screenY,
 					pageX:e.changedTouches[c].pageX,
-					pageY:e.changedTouches[c].pageY
+					pageY:e.changedTouches[c].pageY,
+					time:+new Date()
 				});
 				this.fire("dragend",this.dragPath[e.changedTouches[c].identifier]);
 			}else if(this.searchNear(e.changedTouches[c].clientX,e.changedTouches[c].clientY)){
@@ -112,7 +115,8 @@ JanTac.Gesture = function(target){
 					screenX:e.changedTouches[c].screenX,
 					screenY:e.changedTouches[c].screenY,
 					pageX:e.changedTouches[c].pageX,
-					pageY:e.changedTouches[c].pageY
+					pageY:e.changedTouches[c].pageY,
+					time:+new Date()
 				});
 			}else{
 				//それ以外はtap
@@ -122,7 +126,8 @@ JanTac.Gesture = function(target){
 					screenX:e.changedTouches[c].screenX,
 					screenY:e.changedTouches[c].screenY,
 					pageX:e.changedTouches[c].pageX,
-					pageY:e.changedTouches[c].pageY
+					pageY:e.changedTouches[c].pageY,
+					time:+new Date()
 				});
 				//位置記録削除タイマー起動
 				var id = this.lastPosition.length;
@@ -144,7 +149,8 @@ JanTac.Gesture = function(target){
 						screenX:e.changedTouches[c].screenX,
 						screenY:e.changedTouches[c].screenY,
 						pageX:e.changedTouches[c].pageX,
-						pageY:e.changedTouches[c].pageY
+						pageY:e.changedTouches[c].pageY,
+						time:+new Date()
 					},
 					timerID:t,
 					valid:true
@@ -168,7 +174,8 @@ JanTac.Gesture = function(target){
 				screenX:e.changedTouches[c].screenX,
 				screenY:e.changedTouches[c].screenY,
 				pageX:e.changedTouches[c].pageX,
-				pageY:e.changedTouches[c].pageY
+				pageY:e.changedTouches[c].pageY,
+				time:+new Date()
 			});
 			//dtapD以上離れたらholdタイマー解除
 			if(typeof this.timerHold[e.changedTouches[c].identifier] != 'undefined'){
