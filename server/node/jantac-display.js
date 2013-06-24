@@ -1,5 +1,4 @@
 function JanTacDisplayStack(){
-	this.aaa = "test";
 	this.grandParents = [];
 	this.displays = {};
 	this.createDisplay=function(id,width,height){
@@ -74,44 +73,80 @@ anchor = {
 	this.packDisplays = function(anchor){
 		console.log("pack\t"+this.id);
 		var p = {};
+		var rotate = 0;
+		var presetX = 0;
+		var presetY = 0;
 		if(arguments.length == 0){
 			p={
-				rotate:0,
+				rotate:rotate,
+				id:this.id,
 				X:0,
 				Y:0,
 				width:this.width,
 				height:this.height
 			};
 		}else{
-			var rotate = (parentHeadding + anchor.child.headding) % 4;
+			rotate = (anchor.child.headding + anchor.parent.headding) % 4;
+			console.log("var "+rotate+" = ("+anchor.parent.headding+","+anchor.child.headding+")");
 			var dX = anchor.child.X;
 			var dY = anchor.child.Y;
 			switch(rotate){
-				case 1:
+				case 3:
 					dY = anchor.child.X;
 					dX = this.height - anchor.child.Y;
+					//pY = pX;
+					//pX = pY;
 					break;
 				case 2:
 					dY = this.height - anchor.child.Y;
 					dX = this.width - anchor.child.X;
+					//pY = 
+					//pX = 
 					break;
-				case 3:
-					dY = this.width - anchor.child.X
+				case 1:
+					dY = this.width - anchor.child.X;
 					dX = anchor.child.Y;
+					//pY = this.width - nchor.parent.presetX;
+					//pX = anchor.parent.presetY;
 					break;
 			}
+			var pX = anchor.parent.X;
+			var pY = anchor.parent.Y;
+			switch((anchor.parent.headding) % 4){
+				case 3:
+					pY = anchor.parent.X;
+					pX = anchor.parent.height - anchor.parent.Y;
+					break;
+				case 2:
+					pY = anchor.parent.height - anchor.parent.Y;
+					pX = anchor.parent.width - anchor.parent.X;
+					break;
+				case 1:
+					pY = anchor.parent.width - anchor.parent.X;
+					pX = anchor.child.Y;
+					break;
+			}
+			presetX = anchor.parent.presetX + pX - dX;
+			presetY = anchor.parent.presetY + pY - dY;
 			p={
 				rotate:rotate,
-				X:anchor.parent.X - dX,
-				Y:anchor.parent.Y - dY,
+				id:this.id,
+				X:presetX,
+				Y:presetY,
 				width:(rotate%2==0)?this.width:this.height,
 				height:(rotate%2==0)?this.height:this.width
 			};
+			console.log("===\n"+JSON.stringify(anchor)+"\n===");
 		}
-		p["childlen"]=[];
+		p = [p];
 		this.childlen.forEach(function(my){
-			p.childlen.push(my.child.packDisplays(my.anchor));
-		});
+			my.anchor.parent.headding = rotate;
+			my.anchor.parent.presetX = presetX;
+			my.anchor.parent.presetY = presetY;
+			my.anchor.parent.width = this.width;
+			my.anchor.parent.height = this.height;
+			p.push(my.child.packDisplays(my.anchor));
+		}.bind(this));
 		return p;
 	}
 }

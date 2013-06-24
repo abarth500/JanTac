@@ -113,7 +113,9 @@ function startWebSocket(conf){
 				var message = envelope["message"];
 				switch(command){
 					case "pack":
-						console.log(JSON.stringify(displayStacks[channel].pack()));
+						var displayCloud = displayStacks[channel].pack();
+						console.log(JSON.stringify(displayCloud));
+						sendMessageALL("pack",displayCloud);
 						break;
 					case "turnup-in":
 						if(turnupQue[channel] != null){
@@ -138,7 +140,7 @@ function startWebSocket(conf){
 							console.log("turnup:\tlink!");
 							var goalX = Math.round(parentX + speedX * (inTime - outTime));
 							var goalY = Math.round(parentY + speedY * (inTime - outTime));
-							var rotate = ((outD+inD)%4);
+							var rotate = (4+outD-(inD+2))%4;
 							var rotateX = childX;
 							var rotateY = childY;
 							displayStacks[channel].createDisplay(parentID,parentWidth,parentHeight);
@@ -160,11 +162,13 @@ function startWebSocket(conf){
 							}
 							var anchor = {
 								parent:{
+									id:parentID,
 									headding:0,
 									X:goalX,
 									Y:goalY
 								},
 								child:{
+									id:childID,
 									headding:rotate,
 									X:childX,
 									Y:childY

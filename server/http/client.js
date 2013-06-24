@@ -23,10 +23,11 @@ JanTac.Manager = function(){
 	this.ws = null;
 	this.turnup = null;
 	this.id=null;
-
 	this.init = function(arguments){
 		$("head").append($("<meta/>").attr("name","viewport").attr("content","width=device-width, initial-scale=1.0, user-scalable=no"));
 		$("body").attr("onContextmenu","return false;");
+		$("#canvasLinks").attr({height:$("#panelCover").height()});
+		$("#canvasLinks").attr({width:$("#panelCover").width()});
 		this.turnup = new JanTac.Gesture($("#panelCover").get(0));
 		this.turnup.on("dtap",$.proxy(function(){
 			console.log("pack!");
@@ -37,8 +38,8 @@ JanTac.Manager = function(){
 			var height = $(window).height();
 			var X = dragPath[dragPath.length-1].pageX;
 			var Y = dragPath[dragPath.length-1].pageY;
-			var pX= dragPath[dragPath.length-10].pageX;
-			var pY= dragPath[dragPath.length-10].pageY;
+			var pX= dragPath[dragPath.length-30].pageX;
+			var pY= dragPath[dragPath.length-30].pageY;
 			var time = dragPath[dragPath.length-1].time - dragPath[dragPath.length-10].time;
 			var msg = {out : null};
 			msg.id = this.id;
@@ -68,6 +69,12 @@ JanTac.Manager = function(){
 				msg.height=height;
 				console.log("turnup-out:\t"+JSON.stringify(msg));
 				//this.ws.send(msg);
+				$("#canvasLinks").drawLine({
+					strokeStyle: "#000",
+					strokeWidth: 10,
+					x1: pX, y1: pY,
+					x2: X, y2: Y,
+				});
 				this.sendMessage("turnup-out",msg);
 			}
 		},this);
@@ -81,18 +88,22 @@ JanTac.Manager = function(){
 			};
 
 			msg.in = null;
-			if(msg.X < 50){
+			if(msg.X < 100){
 				msg.in = this.WEST;
-			}else if(msg.X > $("#panelCover").innerWidth() - 50){
+			}else if(msg.X > $("#panelCover").innerWidth() - 100){
 				msg.in = this.EAST;
-			}else if(msg.Y < 50){
+			}else if(msg.Y < 100){
 				msg.in = this.NORTH;
-			}else if(msg.Y > $("#panelCover").innerHeight() - 50){
+			}else if(msg.Y > $("#panelCover").innerHeight() - 100){
 				msg.in = this.SOUTH;
 			}console.log("turnup-in:\t"+JSON.stringify(msg));
 			if(msg.in != null){
-				
 				//this.ws.send(msg);
+				$("#canvasLinks").drawEllipse({
+					fillStyle: "#c33",
+					x: msg.X, y: msg.Y,
+					width: 20, height: 20
+				});
 				this.sendMessage("turnup-in",msg);
 			}
 		},this);
@@ -119,16 +130,17 @@ JanTac.Manager = function(){
 						break;
 					case "link":
 						if(message["child"]["id"]==this.id){
-							//この画面が子リンクの場合
-							if(message["child"]["rotate"]!=0){
-							/*	if(message["child"]["rotate"]%2==1){
-									$('#panelCover').width($('#panelCover').height());
-									$('#panelCover').height($('#panelCover').width());
+							//子画面
+						}else if(message["child"]["id"]==this.id){
+							//親画面
+						}
+						break;
+					case "pack":
+						for(var e = 0;e < message.length;e++){
+							for(var c = 0;c < message[e].length;c++){
+								if(message[e][c].id == this.id){
+									console.log("I am "+this.id+"\n"+JSON.stringify(message[e][c]));
 								}
-								$('#panelCover').rotate({
-									angle: 90*message["child"]["rotate"]
-								});
-							*/
 							}
 						}
 						break;
